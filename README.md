@@ -76,6 +76,69 @@ GARCH models time-varying volatility and volatility clustering: periods of
 high volatility tend to be followed by high volatility, while calm periods
 tend to remain calm.
 
+## First Findings
+
+### 1. Adjusted Close vs. Close
+
+`Close` is the actual market closing price on a given day.
+
+`Adjusted Close` is a historical price series adjusted for distributions and
+corporate actions such as stock splits. It is more suitable for our purpose
+because we want to measure investment returns rather than raw price changes.
+
+Therefore, returns are calculated using Adjusted Close prices.
+
+### 2. The Eight Assets
+
+- SPY — US large-cap equities
+- QQQ — US growth / technology equities
+- IWM — US small-cap equities
+- VGK — European equities
+- HYG — high-yield corporate bonds
+- TLT — long-term US Treasury bonds
+- GLD — gold
+- UUP — US dollar exposure
+
+### 3. Diversification
+
+Having many assets does not automatically mean having many independent risks.
+
+For example, SPY, QQQ, IWM and VGK show high correlations because they all
+contain substantial equity-market risk.
+
+HYG is a bond ETF, but it is also strongly correlated with equities because
+high-yield corporate bonds contain significant credit risk.
+
+**Number of assets ≠ number of independent risks.**
+
+### 4. Correlation Is Not Stable
+
+The full-sample correlation between SPY and TLT is about -0.17.
+
+However, the 60-day rolling correlation changes substantially over time,
+from strongly negative to clearly positive values.
+
+This means that the diversification benefit of long-term Treasury bonds is
+not constant.
+
+A simple intuition:
+
+- During some economic downturns, stocks may fall while interest rates fall.
+  Falling interest rates can increase long-term Treasury bond prices.
+  In this situation, SPY may fall while TLT rises.
+
+- During an inflation and rising-rate environment, higher interest rates can
+  hurt both long-term bonds and stocks.
+  In this situation, SPY and TLT may fall together.
+
+Therefore:
+
+**Diversification itself can be regime-dependent.**
+
+This motivates the central question of the project:
+
+> How stable is portfolio risk when market regimes change?
+
 ## Core Principle
 
 Every model in this project will be documented in terms of:
