@@ -139,6 +139,45 @@ This motivates the central question of the project:
 
 > How stable is portfolio risk when market regimes change?
 
+### 5. Why Correlation and Volatility Belong Together
+
+Correlation and volatility are not two separate topics chosen independently.
+Together, they determine portfolio risk.
+
+For two assets:
+
+σ²ₚ = w₁²σ₁² + w₂²σ₂² + 2w₁w₂ρ₁₂σ₁σ₂
+
+More generally:
+
+σ²ₚ = wᵀΣw
+
+The covariance matrix Σ therefore combines two important pieces of information:
+
+- **Volatility** describes how strongly each individual asset fluctuates.
+- **Correlation** describes how different assets move relative to each other.
+
+Since:
+
+Cov(rᵢ, rⱼ) = ρᵢⱼ σᵢ σⱼ
+
+portfolio risk can change because individual volatilities change, because
+correlations change, or because both change at the same time.
+
+This gives the analysis a natural progression:
+
+**Returns → Correlations and Volatilities → Covariance Matrix → Portfolio Risk**
+
+The previous analysis showed that relationships between assets are not stable.
+The next question is therefore complementary:
+
+> **Is the risk of an individual asset itself stable?**
+
+Together, these observations suggest a broader hypothesis:
+
+> **Diversification can become unstable when market regimes change because both
+> individual asset risk and relationships between assets can change.**
+
 ## Dynamic Volatility: Rolling, EWMA and GARCH
 
 Daily SPY returns show clear volatility clustering: large price movements tend to occur in periods of market stress, while quieter periods contain much smaller fluctuations. This means that a single full-sample volatility estimate cannot describe how risk evolves over time.
