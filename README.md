@@ -139,6 +139,63 @@ This motivates the central question of the project:
 
 > How stable is portfolio risk when market regimes change?
 
+## Dynamic Volatility: Rolling, EWMA and GARCH
+
+Daily SPY returns show clear volatility clustering: large price movements tend to occur in periods of market stress, while quieter periods contain much smaller fluctuations. This means that a single full-sample volatility estimate cannot describe how risk evolves over time.
+
+### 60-Day Rolling Volatility
+
+A 60-day rolling standard deviation estimates current volatility using approximately the last three months of trading days.
+
+It makes changes in market risk visible, but gives every observation inside the window equal weight and then completely removes it once it leaves the window. This can create mechanical features such as plateaus and sudden drops that are partly caused by the model rather than by the market itself.
+
+### EWMA
+
+Exponentially Weighted Moving Average (EWMA) gives more weight to recent observations:
+
+σ²ₜ = λσ²ₜ₋₁ + (1 − λ)r²ₜ₋₁
+
+Using λ = 0.94, recent shocks receive more weight while older information gradually decays.
+
+Unlike a rolling window, EWMA does not suddenly forget an observation. However, λ must be chosen, and the model has no explicit long-run volatility level. If no new shocks occur, its variance estimate eventually decays toward zero.
+
+### GARCH(1,1)
+
+GARCH extends this idea:
+
+σ²ₜ = ω + αr²ₜ₋₁ + βσ²ₜ₋₁
+
+For SPY over the sample period, the fitted model produced approximately:
+
+- ω = 0.0395
+- α = 0.1604
+- β = 0.8042
+- α + β = 0.9646
+
+The high value of α + β indicates persistent volatility, while α + β < 1 allows volatility to mean-revert toward a long-run level.
+
+Because returns were scaled to percentage units before estimation, the implied long-run daily volatility is approximately 1.06%.
+
+Compared with EWMA (λ = 0.94), the fitted GARCH model reacts more strongly to new shocks and allows shock sensitivity and volatility persistence to be estimated separately.
+
+### What the Comparison Shows
+
+The three models can give substantially different risk estimates from exactly the same return history.
+
+During abrupt shocks such as 2020 and 2025, GARCH reacts much more strongly than EWMA or the 60-day rolling estimator. During the more persistent volatility of 2022–2023, the three estimates are considerably closer.
+
+This suggests an important distinction:
+
+> Risk is not simply observed; it is estimated.
+
+The measured level of risk depends not only on the market regime, but also on the model used to measure it. Model dependence appears particularly important during abrupt changes in market conditions.
+
+This leads to the next question:
+
+**How can we evaluate whether a volatility model is actually good?**
+
+The next stage of the project will therefore focus on model validation rather than immediately adding more complex models.
+
 ## Core Principle
 
 Every model in this project will be documented in terms of:
