@@ -139,6 +139,10 @@ This motivates the central question of the project:
 
 > How stable is portfolio risk when market regimes change?
 
+![SPY–TLT 60-Day Rolling Correlation](results/figures/spy_tlt_rolling_correlation.png)
+
+*Figure 1. The 60-day rolling correlation between SPY and TLT changes substantially over time, showing that diversification relationships are not stable.*
+
 ### 5. Why Correlation and Volatility Belong Together
 
 Correlation and volatility are not two separate topics chosen independently.
@@ -234,6 +238,10 @@ This leads to the next question:
 **How can we evaluate whether a volatility model is actually good?**
 
 The next stage of the project will therefore focus on model validation rather than immediately adding more complex models.
+
+![Dynamic Volatility Estimates for SPY](results/figures/volatility_model_comparison.png)
+
+*Figure 2. Rolling, EWMA and GARCH estimates react differently to the same market history, particularly during abrupt shocks.*
 
 ## Core Principle
 
